@@ -5,10 +5,11 @@ import * as cmView from '@codemirror/view' // eslint-disable-line
 import { YRange } from './y-range.js'
 
 export class YSyncConfig {
-  constructor(ytext, awareness, { showLocalCaret, hideCaret }) {
+  constructor(ytext, awareness, { showLocalCaret, hideCaret, scrollIntoView }) {
     this.ytext = ytext
     this.awareness = awareness
     this.showLocalCaret = showLocalCaret || false
+    this.scrollIntoView = scrollIntoView || false
     this.hideCaret = hideCaret || false
     this.undoManager = new Y.UndoManager(ytext)
   }
@@ -127,7 +128,8 @@ class YSyncPluginValue {
         // scroll view to position of this change:
         const hasFocus = view.hasFocus && view.dom.ownerDocument.hasFocus()
         const isValidPosition = pos < view.state.doc.length
-        const effects = (!hasFocus && !event.local && isValidPosition) ? cmView.EditorView.scrollIntoView(pos) : null
+        const shouldScroll = !hasFocus && !event.local && isValidPosition && this.conf.scrollIntoView
+        const effects = shouldScroll ? cmView.EditorView.scrollIntoView(pos) : null
 
         view.dispatch({
           changes,

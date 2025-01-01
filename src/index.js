@@ -16,10 +16,11 @@ export { YRange, yRemoteSelections, yRemoteSelectionsTheme, ySync, ySyncFacet, Y
  * @param {Object} [opts]
  * @param {Y.UndoManager | false} [opts.undoManager] Set undoManager to false to disable the undo-redo plugin
  * @param {boolean | false} [opts.showLocalCaret] Show caret widget on local clients too
+ * @param {boolean | false} [opts.scrollIntoView] Scroll unfocused editor into view if remote cursor moves
  * @param {boolean | false} [opts.hideCaret] Hide the caret widget for all clients (local and remote)
  * @return {cmState.Extension}
  */
-export const yCollab = (ytext, awareness, { undoManager = new Y.UndoManager(ytext), showLocalCaret = false, hideCaret = false } = {}) => {
+export const yCollab = (ytext, awareness, { undoManager = new Y.UndoManager(ytext), showLocalCaret = false, hideCaret = false, scrollIntoView = false } = {}) => {
   const ySyncConfig = new YSyncConfig(ytext, awareness, { showLocalCaret, hideCaret })
   const plugins = [
     ySyncFacet.of(ySyncConfig),

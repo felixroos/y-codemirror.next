@@ -127,6 +127,7 @@ export class YRemoteSelectionsPluginValue {
     this.conf = view.state.facet(ySyncFacet)
 
     this.showLocalCaret = this.conf.showLocalCaret;
+    this.scrollIntoView = this.conf.scrollIntoView;
     this.hideCaret = this.conf.hideCaret;
 
     this._listener = ({ added, updated, removed }, s, t) => {
@@ -136,7 +137,7 @@ export class YRemoteSelectionsPluginValue {
       }
 
       const hasFocus = view.hasFocus && view.dom.ownerDocument.hasFocus()
-      if (!hasFocus) {
+      if (!hasFocus && this.scrollIntoView) {
         this.conf.awareness.getStates().forEach((state, clientid) => {
           // If editor has no focus, for each remote added/updated client, scroll view to position of this change
           if ((added.includes(clientid) || updated.includes(clientid)) && clientid !== this.conf.awareness.doc.clientID) {
