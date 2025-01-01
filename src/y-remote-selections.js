@@ -153,7 +153,7 @@ export class YRemoteSelectionsPluginValue {
     this._awareness = this.conf.awareness
     this._awareness.on('change', this._listener)
 
-    console.log("Set local state field hiddenCaret to", this.hideCaret)
+    // console.log("Set local state field hiddenCaret to", this.hideCaret)
     this.conf.awareness.setLocalStateField("hiddenCaret", this.hideCaret)
 
     /**
