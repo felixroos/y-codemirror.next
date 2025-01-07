@@ -21,7 +21,7 @@ export { YRange, yRemoteSelections, yRemoteSelectionsTheme, ySync, ySyncFacet, Y
  * @return {cmState.Extension}
  */
 export const yCollab = (ytext, awareness, { undoManager = new Y.UndoManager(ytext), showLocalCaret = false, hideCaret = false, scrollIntoView = false } = {}) => {
-  const ySyncConfig = new YSyncConfig(ytext, awareness, { showLocalCaret, hideCaret })
+  const ySyncConfig = new YSyncConfig(ytext, awareness, { showLocalCaret, hideCaret, scrollIntoView })
   const plugins = [
     ySyncFacet.of(ySyncConfig),
     ySync
